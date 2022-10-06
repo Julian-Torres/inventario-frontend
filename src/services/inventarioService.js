@@ -1,5 +1,7 @@
 import {axiosInstance} from'../helpers/axios-config';
 
+//http://localhost:4000/inventario
+
 const getInventarios =()=>{
     return axiosInstance.get('inventario', {
       headers: {

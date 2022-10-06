@@ -25,6 +25,14 @@ const editMarca =(marcaId,data)=>{
     });
 }
 
+const getMarcaPorId =(marcaId)=>{
+  return axiosInstance.get(`marca/${marcaId}`, {
+    headers: {
+      'Content-type': 'application/json'
+    }
+  });
+}
+
 export{
-    getMarcas, crearMarca,editMarca
+    getMarcas, crearMarca,editMarca, getMarcaPorId
 }

@@ -1,4 +1,4 @@
-import React, {useState,useEffect, isValidElement} from 'react'
+import React, {useState,useEffect, isValidElement} from 'react';
 import { useParams } from "react-router-dom";
 import {  getInventarioPorId, editInventario} from "../../services/inventarioService";
 import { getUsuarios } from "../../services/usuarioService";
@@ -20,6 +20,23 @@ export const InventarioUpdate = () => {
 
     const {serial='', modelo='', descripcion='', color='', foto='', fechaCompra='', precio='', 
             usuario, marca, tipo, estado}=valores;
+
+            useEffect(()=>{
+                setValores({
+                    serial:inventario.serial,
+                    modelo:inventario.modelo,
+                    descripcion:inventario.descripcion,
+                    color:inventario.color,
+                    foto:inventario.foto,
+                    fechaCompra:moment(inventario.fechaCompra).format('yyyy-MM-DD'),
+                    precio:inventario.precio,   
+                    usuario:inventario.usuario,
+                    marca:inventario.marca,
+                    estado:inventario.estadoEquipo,                        
+                    tipo:inventario.tipoEquipo
+                })
+                console.log(valores);
+              },[inventario]);
 
     const listarUsuarios=async()=>{
                 try {
@@ -87,22 +104,7 @@ export const InventarioUpdate = () => {
         getInventario();
     },[inventarioId]);
 
-    useEffect(()=>{
-        setValores({
-            serial:inventario.serial,
-            modelo:inventario.modelo,
-            descripcion:inventario.descripcion,
-            color:inventario.color,
-            foto:inventario.foto,
-            fechaCompra:moment(inventario.fechaCompra).format('yyyy-MM-DD'),
-            precio:inventario.precio,   
-            usuario:inventario.usuario,
-            marca:inventario.marca,
-            estado:inventario.estadoEquipo,                        
-            tipo:inventario.tipoEquipo
-        })
-        console.log(valores);
-      },[inventario]);
+    
 
       const handleOnSubmit = async (e)=>{
         e.preventDefault();
