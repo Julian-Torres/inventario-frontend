@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
-import {getUsuarios} from '../../services/usuarioService';
-import {UsuarioCard} from './UsuarioCard'; 
-import { UsuarioNew } from "./UsuarioNew";
+import {getTiposEquipo} from '../../services/tipoEquipoService';
+import {TipoEquipoCard} from './TipoEquipoCard'; 
+import { TipoEquipoNew } from "./TipoEquipoNew.js";
 import Swal from 'sweetalert2';
 
-export const UsuarioView = () => {
+export const TipoEquipoView = () => {
 
-  const[usuarios,setUsuarios]=useState([]);
+  const[tiposEquipo,setTiposEquipo]=useState([]);
   const[openModal,setOpenModal]=useState(false);
 
-  const listarUsuarios=async()=>{
+  const listarTiposEquipo=async()=>{
     try {
       Swal.fire({
         allowOutsideClick:false,
         text: 'CARGANDO.'
       }); 
-      const {data} = await getUsuarios();
-
-      setUsuarios(data);
+      const {data} = await getTiposEquipo();
+      console.log(data);
+      setTiposEquipo(data);
       Swal.close();
     } catch (error) {
       console.log(error);
@@ -25,7 +25,7 @@ export const UsuarioView = () => {
   } 
 
   useEffect(()=>{
-    listarUsuarios();
+    listarTiposEquipo();
   },[]);
 
   const handleOpenModal=()=>{
@@ -36,16 +36,16 @@ export const UsuarioView = () => {
     <div className="container-fluid">
       <div className="mt-2 mb-2 row row-cols-1 row-cols-md-4 g-4">
         { 
-          usuarios.map((usuario)=>{
-            return <UsuarioCard key={usuario._id} usuario={usuario}/>
+          tiposEquipo.map((tipoEquipo)=>{
+            return <TipoEquipoCard key={tipoEquipo._id} tipoEquipo={tipoEquipo}/>
           })
         }
       </div>
 
       {
-        openModal ? <UsuarioNew 
+        openModal ? <TipoEquipoNew 
                     handleOpenModal={handleOpenModal}
-                    listarUsuarios={listarUsuarios}/>
+                    listarTiposEquipo={listarTiposEquipo}/>
       : (<button className="btn btn-primary fab" onClick={handleOpenModal}>
           <i className="fa-solid fa-plus"></i>
          </button>)

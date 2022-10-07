@@ -1,38 +1,63 @@
-import React, {useState}from 'react'
+import React, {useState,useEffect, isValidElement} from 'react'
+import { useParams } from "react-router-dom";
+import {  getUsuarioPorId, editUsuario} from "../../services/usuarioService"
 import Swal from 'sweetalert2';
-import { crearMarca } from '../../services/marcaService';
 
-export const MarcaNew = ({handleOpenModal, listarMarcas}) => {
+export const UsuarioUpdate = () => {
 
-   
+    const {usuarioId=''}=useParams();
+    const[usuario,setUsuario] = useState({})
     const[valores,setValores]=useState({});
 
+
     const {nombre='', estado=''}=valores;
- 
-    const handleOnChange=({target})=>{
-        const{name,value}=target;
-        setValores({...valores,[name]:value}) 
+
+    useEffect(()=>{
+        setValores({
+            nombre:usuario.nombre,
+            estado:usuario.estado,
+        })
+        console.log(valores);
+      },[usuario]);
+   
+    const getUsuario= async()=>{
+        try {
+            Swal.fire({
+                allowOutsideClick:false,
+                text: 'CARGANDO.'
+            }); 
+            const{data}=await getUsuarioPorId(usuarioId)
+            setUsuario(data);
+            Swal.close();
+        } catch (error) {
+            console.log(error);
+        }
     }
 
-    const handleOnSubmit = async (e)=>{
+    console.log(usuario);
+
+    useEffect(()=>{
+        getUsuario();
+    },[usuarioId]);       
+
+
+      const handleOnSubmit = async (e)=>{
         e.preventDefault();
-        const marca={
-            nombre, estado
-            }
-        console.log(marca);
+        const usuario={
+            nombre, estado,}
+        console.log(usuario);
         try {
             Swal.fire({
                 allowOutsideClick:false,
                 text: 'CARGANDO.'
             });
             Swal.showLoading();
-            const{data}=await crearMarca(marca);
+            const{data}=await editUsuario(usuarioId,usuario);
             console.log(data);
             Swal.close();
-            handleOpenModal();
-            listarMarcas();
         } catch (error) {
             console.log(error);
+            console.log(error.response);
             Swal.close();
             let mensaje;
             if(error && error.response && error.response.data){
@@ -43,22 +68,23 @@ export const MarcaNew = ({handleOpenModal, listarMarcas}) => {
             Swal.fire('ERROR',mensaje,'error')
         }
         }     
-    
-  return (
-    <div className='sidebar'>
-        <div className='container-fluid'>
-            <div className='row'>
-                <div className='col'>
-                    <div className='sidebar-header'>
-                        <h3>Nueva marca</h3> 
-                        <i className="fa-solid fa-xmark" onClick={handleOpenModal}></i>
-                    </div>
-                </div>
+
+    const handleOnChange=({target})=>{
+        const{name,value}=target;
+        setValores({...valores,[name]:value}) 
+    }
+
+
+ return(
+    <div className='container-fluid mt-3 mb-2'>
+        <div className='card'>
+            <div className='card-header'>
+                <h5 className='card-title'>Detalle Usuario</h5>
             </div>
-            <div className='row'><hr/></div>
-        </div>
-        <form onSubmit={(e)=>handleOnSubmit(e)}>
-            <div className='row'>
+            <div className='card-body'>
+                <div className='row'>
+                        <form onSubmit={(e)=>handleOnSubmit(e)}>
+                        <div className='row'>
                 <div className='col'>
                     <div className="mb-3">
                         <label className="form-label">Nombre</label>
@@ -85,12 +111,15 @@ export const MarcaNew = ({handleOpenModal, listarMarcas}) => {
                     </div>
                 </div>
             </div>
-            <div className='row'>
-                <div className='col'>
-                    <button className='btn btn-primary'>GUARDAR</button>
+                            <div className='row'>
+                                <div className='col'>
+                                    <button className='btn btn-primary'>GUARDAR</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </form>
-    </div>
-  )
+        </div>
+ )
 }

@@ -1,8 +1,8 @@
 import React, {useState}from 'react'
 import Swal from 'sweetalert2';
-import { crearMarca } from '../../services/marcaService';
+import { crearTipoEquipo } from '../../services/tipoEquipoService';
 
-export const MarcaNew = ({handleOpenModal, listarMarcas}) => {
+export const TipoEquipoNew = ({handleOpenModal, listarEstadosEquipo}) => {
 
    
     const[valores,setValores]=useState({});
@@ -16,21 +16,21 @@ export const MarcaNew = ({handleOpenModal, listarMarcas}) => {
 
     const handleOnSubmit = async (e)=>{
         e.preventDefault();
-        const marca={
+        const tipoEquipo={
             nombre, estado
             }
-        console.log(marca);
+        console.log(tipoEquipo);
         try {
             Swal.fire({
                 allowOutsideClick:false,
                 text: 'CARGANDO.'
             });
             Swal.showLoading();
-            const{data}=await crearMarca(marca);
+            const{data}=await crearTipoEquipo(tipoEquipo);
             console.log(data);
             Swal.close();
             handleOpenModal();
-            listarMarcas();
+            listarEstadosEquipo();
         } catch (error) {
             console.log(error);
             Swal.close();
@@ -50,7 +50,7 @@ export const MarcaNew = ({handleOpenModal, listarMarcas}) => {
             <div className='row'>
                 <div className='col'>
                     <div className='sidebar-header'>
-                        <h3>Nueva marca</h3> 
+                        <h3>Nuevao Tipo de Equipo</h3> 
                         <i className="fa-solid fa-xmark" onClick={handleOpenModal}></i>
                     </div>
                 </div>

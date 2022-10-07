@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
-import {getUsuarios} from '../../services/usuarioService';
-import {UsuarioCard} from './UsuarioCard'; 
-import { UsuarioNew } from "./UsuarioNew";
+import {getEstadosEquipo} from '../../services/estadoEquipoService';
+import {EstadoEquipoCard} from './EstadoEquipoCard'; 
+import { EstadoEquipoNew } from "./EstadoEquipoNew.js";
 import Swal from 'sweetalert2';
 
-export const UsuarioView = () => {
+export const EstadoEquipoView = () => {
 
-  const[usuarios,setUsuarios]=useState([]);
+  const[estadosEquipo,setEstadosEquipo]=useState([]);
   const[openModal,setOpenModal]=useState(false);
 
-  const listarUsuarios=async()=>{
+  const listarEstadosEquipo=async()=>{
     try {
       Swal.fire({
         allowOutsideClick:false,
         text: 'CARGANDO.'
       }); 
-      const {data} = await getUsuarios();
-
-      setUsuarios(data);
+      const {data} = await getEstadosEquipo();
+      console.log(data);
+      setEstadosEquipo(data);
       Swal.close();
     } catch (error) {
       console.log(error);
@@ -25,7 +25,7 @@ export const UsuarioView = () => {
   } 
 
   useEffect(()=>{
-    listarUsuarios();
+    listarEstadosEquipo();
   },[]);
 
   const handleOpenModal=()=>{
@@ -36,16 +36,16 @@ export const UsuarioView = () => {
     <div className="container-fluid">
       <div className="mt-2 mb-2 row row-cols-1 row-cols-md-4 g-4">
         { 
-          usuarios.map((usuario)=>{
-            return <UsuarioCard key={usuario._id} usuario={usuario}/>
+          estadosEquipo.map((estadoEquipo)=>{
+            return <EstadoEquipoCard key={estadoEquipo._id} estadoEquipo={estadoEquipo}/>
           })
         }
       </div>
 
       {
-        openModal ? <UsuarioNew 
+        openModal ? <EstadoEquipoNew 
                     handleOpenModal={handleOpenModal}
-                    listarUsuarios={listarUsuarios}/>
+                    listarEstadosEquipo={listarEstadosEquipo}/>
       : (<button className="btn btn-primary fab" onClick={handleOpenModal}>
           <i className="fa-solid fa-plus"></i>
          </button>)
@@ -53,3 +53,4 @@ export const UsuarioView = () => {
     </div>
   )
 }
+

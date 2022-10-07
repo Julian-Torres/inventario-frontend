@@ -28,7 +28,7 @@ export const InventarioUpdate = () => {
                     descripcion:inventario.descripcion,
                     color:inventario.color,
                     foto:inventario.foto,
-                    fechaCompra:moment(inventario.fechaCompra).format('yyyy-MM-DD'),
+                    fechaCompra:moment.utc(inventario.fechaCompra).format('yyyy-MM-DD'),
                     precio:inventario.precio,   
                     usuario:inventario.usuario,
                     marca:inventario.marca,
