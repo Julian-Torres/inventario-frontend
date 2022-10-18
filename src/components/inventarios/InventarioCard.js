@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from'react-router-dom';
+import {NavLink} from'react-router-dom';
 
 export const InventarioCard = (props) => {
  
@@ -16,7 +16,7 @@ export const InventarioCard = (props) => {
                 <p className="card-text">{`Marca: ${inventario.marca.nombre}`}</p>
                 <p className="card-text">{`Descripcion: ${inventario.descripcion}`}</p>
                 <p className="card-text">
-                  <Link to={`/inventarios/edit/${inventario._id}`}>Ver mas...</Link>
+                  <NavLink to={`/inventarios/edit/${inventario._id}`}>Ver mas...</NavLink>
                 </p>
             </div>
         </div> 

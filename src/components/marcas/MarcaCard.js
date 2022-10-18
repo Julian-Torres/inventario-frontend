@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from'react-router-dom';
+import {NavLink} from'react-router-dom';
 
 export const MarcaCard = (props) => {
  
@@ -14,7 +14,7 @@ export const MarcaCard = (props) => {
                 <p className="card-text">{`Nombre: ${marca.nombre}`}</p>
                 <p className="card-text">{`Estado: ${marca.estado}`}</p>
                 <p className="card-text">
-                  <Link to={`/marcas/edit/${marca._id}`}>Editar.</Link>
+                  <NavLink to={`/marcas/edit/${marca._id}`}>Editar.</NavLink>
                 </p>
             </div>
         </div> 

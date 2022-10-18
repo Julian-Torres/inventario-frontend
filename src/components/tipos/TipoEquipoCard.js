@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from'react-router-dom';
+import {NavLink} from'react-router-dom';
 
 export const TipoEquipoCard = (props) => {
  
@@ -14,7 +14,7 @@ export const TipoEquipoCard = (props) => {
                 <p className="card-text">{`Nombre: ${tipoEquipo.nombre}`}</p>
                 <p className="card-text">{`Estado: ${tipoEquipo.estado}`}</p>
                 <p className="card-text">
-                  <Link to={`/tipo-equipo/edit/${tipoEquipo._id}`}>Editar.</Link>
+                  <NavLink to={`/tipo-equipo/edit/${tipoEquipo._id}`}>Editar.</NavLink>
                 </p>
             </div>
         </div> 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import {BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import {Header} from './components/ui/header';
 import {EstadoEquipoView} from'./components/estados/EstadoEquipoView';
 import {InventarioView} from'./components/inventarios/InventarioView';
@@ -14,22 +14,24 @@ import { TipoEquipoUpdate } from "./components/tipos/TipoEquipoUpdate";
 
 
 const App = () => {
-    return<Router> 
+    return<BrowserRouter> 
         <Header/>
-        <Switch>
-            <Route exact path='/' component={InventarioView}/>
-            <Route exact path='/usuarios' component={UsuarioView}/>
-            <Route exact path='/marcas' component={MarcaView}/>
-            <Route exact path='/estados' component={EstadoEquipoView}/>
-            <Route exact path='/tipos' component={TipoEquipoView}/>
-            <Route exact path='/inventarios/edit/:inventarioId' component={InventarioUpdate}/>
-            <Route exact path='/marcas/edit/:marcaId' component={MarcaUpdate}/>
-            <Route exact path='/usuarios/edit/:usuarioId' component={UsuarioUpdate}/>
-            <Route exact path='/estado-equipo/edit/:estadoEquipoId' component={EstadoEquipoUpdate}/>
-            <Route exact path='/tipo-equipo/edit/:tipoEquipoId' component={TipoEquipoUpdate}/>
-            <Redirect to='/'/>
-        </Switch>
-    </Router>
+        <Routes>
+            <Route path='/' element={<InventarioView/>}/>
+            <Route path='/usuarios' element={<UsuarioView/>}/>
+            <Route path='/marcas' element={<MarcaView/>}/>
+            <Route path='/estados' element={<EstadoEquipoView/>}/>
+            <Route path='/tipos' element={<TipoEquipoView/>}/>
+            <Route path='/inventarios/edit/:inventarioId' element={<InventarioUpdate/>}/>
+            <Route path='/marcas/edit/:marcaId' element={<MarcaUpdate/>}/>
+            <Route path='/usuarios/edit/:usuarioId' element={<UsuarioUpdate/>}/>
+            <Route path='/estado-equipo/edit/:estadoEquipoId' element={<EstadoEquipoUpdate/>}/>
+            <Route path='/tipo-equipo/edit/:tipoEquipoId' element={<TipoEquipoUpdate/>}/>
+            <Route path="*"
+                element={<Navigate to="/" replace />}
+            />
+        </Routes>
+    </BrowserRouter>
 }
 
 export{

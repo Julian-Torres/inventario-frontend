@@ -14,22 +14,22 @@ export const Header  = () => {
            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
              <li className="nav-item">
                <NavLink className="nav-link"
-                activeClassName='active' exact aria-current="page" to='/'>Activos</NavLink>                    </li>
+                activeclassname='active' end aria-current="page" to='/'>Activos</NavLink>                    </li>
              <li className="nav-item">
                <NavLink className="nav-link" 
-                activeClassName='active' exact aria-current="page" to='/usuarios'>Usuarios</NavLink>
+                activeclassname='active' end aria-current="page" to='/usuarios'>Usuarios</NavLink>
              </li>
              <li className="nav-item">   
                <NavLink className="nav-link" 
-                activeClassName='active' exact aria-current="page" to='/marcas'>Marcas</NavLink>
+                activeclassname='active' end aria-current="page" to='/marcas'>Marcas</NavLink>
              </li>
              <li className="nav-item">
                <NavLink className="nav-link" 
-                activeClassName='active' exact aria-current="page" to='/estados'>Estados</NavLink>
+                activeclassname='active' end aria-current="page" to='/estados'>Estados</NavLink>
              </li>
              <li className="nav-item">
                <NavLink className="nav-link" 
-                activeClassName='active'exact aria-current="page" to='/tipos'>Tipos</NavLink>
+                activeclassname='active'end aria-current="page" to='/tipos'>Tipos</NavLink>
              </li>
            </ul>
         </div>
