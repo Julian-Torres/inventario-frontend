@@ -27,6 +27,7 @@ const App = () => {
             <Route path='/usuarios/edit/:usuarioId' element={<UsuarioUpdate/>}/>
             <Route path='/estado-equipo/edit/:estadoEquipoId' element={<EstadoEquipoUpdate/>}/>
             <Route path='/tipo-equipo/edit/:tipoEquipoId' element={<TipoEquipoUpdate/>}/>
+            <Route path='/usuario/delete/:usuarioId' element={<UsuarioDelete/>}/>
             <Route path="*"
                 element={<Navigate to="/" replace />}
             />
